@@ -18,7 +18,6 @@
 // Constantes para conexão com o display OLED
 const uint I2C_SDA_PIN = 14;
 const uint I2C_SCL_PIN = 15;
-#define ANG_PIN 28
 
 // Constantes para escrita dos NEOLEDS
 #define LED_COUNT 25
@@ -26,8 +25,8 @@ const uint I2C_SCL_PIN = 15;
 #define BRIGHTNESS 2
 
 // Rede wifi para conexão
-#define WIFI_SSID "Linux"
-#define WIFI_PASS "00000000"
+#define WIFI_SSID "NomeDaRedeWifi"
+#define WIFI_PASS "SenhaDaRedeWifi"
 
 // Constante para conexão do arduino para a placa BitDogLab
 #define UART_0_TX 16
@@ -300,13 +299,9 @@ int main()
     gpio_set_function(UART_0_TX, GPIO_FUNC_UART);
     gpio_set_function(UART_0_RX, GPIO_FUNC_UART);
 
-        
 
     uart_set_hw_flow(uart0, false, false);
     uart_set_format(uart0, DATA_BITS, STOP_BITS, PARITY);
-    adc_init();
-
-    adc_gpio_init(ANG_PIN);
 
     SSD1306_init();
 
@@ -316,7 +311,7 @@ int main()
         start_page : 0,
         end_page : SSD1306_NUM_PAGES - 1
     };
-    
+
     calc_render_area_buflen(&frame_area);
 
     uint8_t buf[SSD1306_BUF_LEN];
